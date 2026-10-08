@@ -90,30 +90,30 @@ class ProductUI {
     this.element = this.renderProduct();
   }
   renderProduct() {
-    let li = document.createElement('li');
+    const li = document.createElement('li');
     li.classList.add('product-listing');
     li.dataset.id = this.product.id;
 
-    let thumbnail = document.createElement('img');
+    const thumbnail = document.createElement('img');
     thumbnail.src = this.product.thumbnail;
     li.appendChild(thumbnail);
 
-    let priceDiv = document.createElement('div');
+    const priceDiv = document.createElement('div');
     priceDiv.classList.add('price-container');
 
-    let discount = document.createElement('p');
+    const discount = document.createElement('p');
     discount.textContent = `$${(this.product.price * (1 - (this.product.discountPercentage / 100))).toFixed(2)}`;
     discount.classList.add('discount-price');
     priceDiv.appendChild(discount);
 
-    let price = document.createElement('p')
+    const price = document.createElement('p')
     price.innerHTML = `List: $<span>${this.product.price}</span>`;
     price.classList.add('list-price');
     priceDiv.appendChild(price);
 
     li.appendChild(priceDiv);
 
-    let title = document.createElement('p');
+    const title = document.createElement('p');
     title.textContent = this.product.title;
     title.classList.add('title');
     li.appendChild(title);
@@ -124,14 +124,34 @@ class ProductUI {
 class ProductDetailsUI {
   constructor(product) {
     this.product = product
-    this.element = this.renderProductDetails();
+    this.renderProductDetails();
   }
   renderProductDetails() {
-    let overlay = document.querySelector('.overlay');
-    overlay.classList.toggle('hidden');
+    const overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+    overlay.addEventListener('click', (e) => {
+      overlay.remove();
+    })
 
-    let productDetails = document.createElement('div');
+    const productDetails = document.createElement('div');
+    productDetails.classList.add('product-details');
+
+    const productImages = document.createElement('img');
+    productImages.src = this.product.images[0];
+    productDetails.appendChild(productImages);
+
+    const productTitle = document.createElement('p');
+    productTitle.textContent = this.product.title;
+    productTitle.classList.add('title');
+    productDetails.appendChild(productTitle);
+
+    const productDescription = document.createElement('p');
+    productDescription.textContent = this.product.description;
+    productDetails.appendChild(productDescription);
+    
+    
     overlay.appendChild(productDetails);
+    document.body.appendChild(overlay);
   }
 }
 

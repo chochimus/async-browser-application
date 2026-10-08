@@ -75,17 +75,17 @@
     left: 0;
     height: 100%;
     width: 100%;
-    pointer-events: none;
-    color: rgba(0, 0, 0, 0.774);
-}
-
-.hidden {
-    display: none;
+    background-color: rgba(0, 0, 0, 0.788);
 }
 
 .product-details {
     position: relative;
-    width: 200px;
-    height: 200px;
+    top: 10%;
+    left: 10%;
+    width: 80%;
     background-color: white;
+}
+
+.product-details img {
+    width: 50%;
 }
