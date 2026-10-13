@@ -170,7 +170,7 @@ class SearchAndFilterUI {
   }
   handleChange(e) {
     if (e.target.id === 'search' && e.type === 'input') {
-      this.manager.search = e.target.value;
+      this.manager.search = e.target.value.toLowerCase();
     } else if (e.target.id === 'filter' && e.type === 'change') {
       this.manager.filter = e.target.value;
     } else if (e.target.id === 'sort' && e.type === 'change') {
