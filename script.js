@@ -27,21 +27,33 @@ class ProductListUI {
     new ProductDetailsUI(product);
   }
   renderProductList() {
+    let productList = document.createElement('div');
+    let products = this.manager.getProducts();
+    let matches = document.createElement('p');
+    matches.textContent = `${products.length} match${products.length === 1 ? '' : 'es'} found`;
+    productList.appendChild(matches);
+    
     let ul = document.createElement('ul');
     ul.classList.add('product-list');
-    this.manager.getProducts().forEach(product => {
+    products.forEach(product => {
       let li = new ProductUI(product);
       ul.appendChild(li.element);
     });
+    productList.appendChild(ul)
     
-    return ul;
+    return productList;
   }
   refresh() {
     this.element.remove();
     this.element = this.renderProductList();
+    
+    if (this.element.children[1].children.length === 0){
+      let h2 = document.createElement('h2');
+      h2.textContent = 'No matching results';
+      this.element.replaceChild(h2, this.element.children[1]);
+    }
     this.element.addEventListener('click', this.handleListClick);
     let contentWindowElement = document.getElementById('contentWindow');
-    console.log(contentWindowElement);
     contentWindowElement.appendChild(this.element);
   }
 }
